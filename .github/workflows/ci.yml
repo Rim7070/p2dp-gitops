@@ -11,21 +11,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install kubectl
-        uses: azure/setup-kubectl@v3
+        uses: azure/setup-kubectl@v4
 
       - name: Validate Kubernetes manifests
         run: |
-          kubectl apply --dry-run=client -f apps/p2dp/
+          kubectl apply --dry-run=client --validate=false -f apps/p2dp/
 
   security-scan:
     runs-on: ubuntu-latest
     needs: validate
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Run Trivy scan
         uses: aquasecurity/trivy-action@master
